@@ -1,0 +1,107 @@
+# Shopify App Template - Extension Only
+
+This is a template for building a [Shopify app](https://shopify.dev/docs/apps/getting-started) using [Preact](https://preactjs.com/) and [Vite](https://vite.dev/). It uses Shopify's [Direct API access](https://shopify.dev/docs/api/app-home#direct-api-access) and [App Bridge](https://shopify.dev/docs/api/app-bridge) to make authenticated calls to the Shopify Admin API directly from the browser — no server required.
+
+
+## Quick start
+
+### Prerequisites
+
+Before you begin, you'll need to [download and install the Shopify CLI](https://shopify.dev/docs/apps/tools/cli/getting-started) if you haven't already.
+
+### Setup
+
+```shell
+shopify app init --template=https://github.com/Shopify/shopify-app-template-extension-only
+```
+
+### Local Development
+
+```shell
+shopify app dev
+```
+
+Press P to open the URL to your app. Once you click install, you can start development.
+
+Local development is powered by [Shopify CLI](https://shopify.dev/docs/apps/build/cli-for-apps/test-apps-locally). It logs into your account, connects to an app, provides environment variables, updates remote config, creates a tunnel and provides commands to generate extensions.
+
+## How it works
+
+### Authentication
+
+This template uses [Shopify managed installation](https://shopify.dev/docs/apps/build/authentication-authorization/app-installation). Shopify handles the OAuth flow and app installation automatically. Once installed, the app is fully embedded in the Shopify Admin.
+
+### Querying data
+
+This template uses [Direct API access](https://shopify.dev/docs/api/app-home#direct-api-access) — the Shopify Admin API is called directly from the browser using App Bridge. No server-side code is needed.
+
+This template comes pre-configured with examples of querying data using GraphQL with direct API access, and using [metaobjects](https://shopify.dev/docs/apps/custom-data/metaobjects) to store and retrieve structured app data — see [/shared/models/faq.ts](./shared/models/faq.ts).
+
+### App Bridge
+
+[App Bridge](https://shopify.dev/docs/api/app-bridge) is loaded automatically in embedded apps.
+
+### Polaris Web Components
+
+This template uses [Polaris Web Components](https://shopify.dev/docs/api/app-home/web-components) — the native custom element version of Polaris that works in any framework (including Preact). No additional package installation is required as they are provided automatically in the Shopify Admin iframe.
+
+
+## Build
+
+Build the app by running:
+
+Using npm:
+
+```shell
+npm run build
+```
+
+Using yarn:
+
+```shell
+yarn build
+```
+
+Using pnpm:
+
+```shell
+pnpm run build
+```
+
+## Shopify Dev MCP
+
+This template is configured with the Shopify Dev MCP. This instructs [Cursor](https://cursor.com/), [GitHub Copilot](https://github.com/features/copilot), [Claude Code](https://claude.com/product/claude-code), and [Google Gemini CLI](https://github.com/google-gemini/gemini-cli) to use the Shopify Dev MCP.
+
+For more information on the Shopify Dev MCP please read [the documentation](https://shopify.dev/docs/apps/build/devmcp).
+
+## Checkout attributes and validation
+
+This app uses Shopify checkout attributes to persist the acknowledgements and form data collected during checkout. These values are stored when the customer completes the required steps and are used to enforce the checkout rules.
+
+### Checkout attributes used by this app
+
+- `express_policy_ok` for the express shipping policy acknowledgement
+- `sign_req_ok` for the signature requirement acknowledgement
+- `rx_form_completed` for the prescription form completion status
+- `rx_pet_name`, `rx_vet_name`, and `rx_vet_phone` for the collected prescription details
+- `has_rx_product` to detect whether the cart contains prescription items
+
+These attributes are updated through Shopify's attribute change API during checkout, allowing the extension to remember the customer's progress and block checkout until the required actions are completed.
+
+## Resources
+
+Preact & Vite:
+
+- [Preact docs](https://preactjs.com/guide/v10/getting-started)
+- [Vite docs](https://vite.dev/)
+
+Shopify:
+
+- [Intro to Shopify apps](https://shopify.dev/docs/apps/getting-started)
+- [Direct API access](https://shopify.dev/docs/api/app-home#direct-api-access)
+- [Shopify CLI](https://shopify.dev/docs/apps/tools/cli)
+- [App Bridge](https://shopify.dev/docs/api/app-bridge)
+- [Polaris Web Components](https://shopify.dev/docs/api/app-home/web-components)
+- [Metaobjects](https://shopify.dev/docs/apps/custom-data/metaobjects)
+- [App extensions](https://shopify.dev/docs/apps/app-extensions/list)
+- [Shopify Functions](https://shopify.dev/docs/api/functions)
